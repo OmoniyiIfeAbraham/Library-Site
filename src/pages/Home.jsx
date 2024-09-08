@@ -1,6 +1,7 @@
 import "./../App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [fictional, setFictional] = useState([]);
@@ -88,22 +89,24 @@ function Home() {
           >
             {fictional.map((book, index) => (
               <div className="book-card" key={index}>
-                {book.volumeInfo && book.volumeInfo.imageLinks ? (
-                  <img
-                    src={book.volumeInfo.imageLinks.thumbnail}
-                    alt={book.volumeInfo.title}
-                    className="book-image"
-                  />
-                ) : (
-                  <img
-                    src="./../../assests/default.jpg"
-                    alt="Default"
-                    className="book-image"
-                  />
-                )}
-                {book.volumeInfo && (
-                  <p className="book-title">{book.volumeInfo.title}</p>
-                )}
+                <Link to={`/book/${book.id}`} className="custom-link">
+                  {book.volumeInfo && book.volumeInfo.imageLinks ? (
+                    <img
+                      src={book.volumeInfo.imageLinks.thumbnail}
+                      alt={book.volumeInfo.title}
+                      className="book-image"
+                    />
+                  ) : (
+                    <img
+                      src="./../../assests/default.jpg"
+                      alt="Default"
+                      className="book-image"
+                    />
+                  )}
+                  {book.volumeInfo && (
+                    <p className="book-title">{book.volumeInfo.title}</p>
+                  )}
+                </Link>
               </div>
             ))}
           </div>
@@ -127,23 +130,25 @@ function Home() {
           >
             {nonFictional.map((book, index) => (
               <div className="book-card" key={index}>
-                {book.volumeInfo && book.volumeInfo.imageLinks ? (
-                  <img
-                    src={book.volumeInfo.imageLinks.thumbnail}
-                    alt={book.volumeInfo.title}
-                    className="book-image"
-                  />
-                ) : (
-                  <img
-                    src="./../../assests/default.jpg"
-                    alt="Default"
-                    className="book-image"
-                  />
-                )}
+                <Link to={`/book/${book.id}`} className="custom-link">
+                  {book.volumeInfo && book.volumeInfo.imageLinks ? (
+                    <img
+                      src={book.volumeInfo.imageLinks.thumbnail}
+                      alt={book.volumeInfo.title}
+                      className="book-image"
+                    />
+                  ) : (
+                    <img
+                      src="./../../assests/default.jpg"
+                      alt="Default"
+                      className="book-image"
+                    />
+                  )}
 
-                {book.volumeInfo && (
-                  <p className="book-title">{book.volumeInfo.title}</p>
-                )}
+                  {book.volumeInfo && (
+                    <p className="book-title">{book.volumeInfo.title}</p>
+                  )}
+                </Link>
               </div>
             ))}
           </div>

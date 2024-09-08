@@ -85,3 +85,8 @@ body {
 .carousel-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+.custom-link {
+  text-decoration: none;
+  color: inherit;
+}
