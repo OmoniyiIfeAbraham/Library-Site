@@ -6,7 +6,9 @@ import { useEffect } from "react";
 
 function Detail() {
   const { id } = useParams();
+  console.log(id)
   const [book, setBook] = useState(null);
+  const [authorsBooks, setAuthorsBooks] = useState([]);
 
   let config = {
     headers: { "content-type": "multipart/form-data" },
@@ -20,6 +22,29 @@ function Detail() {
       .then((result) => {
         if (result.data) {
           setBook(result.data);
+
+          // Fetch author's books once the main book data is fetched
+          const author = result.data.volumeInfo.authors?.[0];
+          if (author) {
+            fetchAuthorsBooks(author);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const fetchAuthorsBooks = (author) => {
+    // Format author name to be URL-friendly
+    const formattedAuthor = encodeURIComponent(author.trim());
+    let url = `https://www.googleapis.com/books/v1/volumes?q=fictional+inauthor:${formattedAuthor}&key=AIzaSyAhtPq5ETX-NnyQ8_LfhBVzjx6jpoW_b0c&maxResults=40`;
+
+    axios
+      .get(url, config)
+      .then((result) => {
+        if (result.data.items && result.data.items.length > 0) {
+          setAuthorsBooks(result.data.items);
         }
       })
       .catch((error) => {
@@ -29,7 +54,7 @@ function Detail() {
 
   useEffect(() => {
     fetchBookData();
-  }, []);
+  }, [id]);
 
   return (
     <div>
@@ -135,6 +160,45 @@ function Detail() {
                 <p>Read More...</p>
               </Link>
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="divider"
+        style={{ width: "100%", paddingLeft: 45, paddingRight: 45 }}
+      >
+        <hr />
+      </div>
+      <div className="books">
+        <h3 className="heading">
+          Books written by {book?.volumeInfo?.authors[0]}
+        </h3>
+        <div className="carousel-container">
+          <div className="carousel">
+            {authorsBooks.map((book, index) => (
+              <div className="book-card" key={index}>
+                <Link to={`/book/${book.id}`} className="custom-link">
+                  {book.volumeInfo && book.volumeInfo.imageLinks ? (
+                    <img
+                      src={book.volumeInfo.imageLinks.thumbnail}
+                      alt={book.volumeInfo.title}
+                      className="book-image"
+                    />
+                  ) : (
+                    <img
+                      src="./../../assests/default.jpg"
+                      alt="Default"
+                      className="book-image"
+                    />
+                  )}
+                  {book.volumeInfo && (
+                    <p className="book-title">
+                      {book.volumeInfo.title.slice(0, 30)}...
+                    </p>
+                  )}
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>

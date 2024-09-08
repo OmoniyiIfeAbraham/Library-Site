@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -18,27 +19,30 @@ body {
   color: #333;
 }
 
+/* Updated Carousel Container */
 .carousel-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto; /* Enables horizontal scrolling */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Aligns items to the start */
+  margin-bottom: 30px;
+  padding-bottom: 10px; /* Adds padding to avoid cutoff */
 }
 
+/* Updated Carousel */
 .carousel {
-  width: 100%;
-  overflow: hidden;
-}
-
-.carousel-inner {
-  display: flex;
-  transition: transform 0.5s ease;
+  display: flex; /* Flex to align items in a row */
+  gap: 20px; /* Adds spacing between items */
+  overflow-x: auto; /* Enables horizontal scrolling */
+  scroll-behavior: smooth; /* Smooth scrolling effect */
+  padding: 10px 0;
 }
 
 .book-card {
-  flex: 0 0 16.66%; /* 6 items fit in 100% width */
+  flex: 0 0 auto; /* Ensure items don't shrink */
+  width: 150px; /* Fixed width for each card */
   margin: 0 10px;
   box-sizing: border-box;
   text-align: center;
@@ -46,6 +50,12 @@ body {
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .book-image {
@@ -61,32 +71,16 @@ body {
   color: #555;
 }
 
+/* Remove Carousel Button Styles */
 .carousel-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 18px;
-  z-index: 1;
-}
-
-.carousel-button.left {
-  left: 10px;
-}
-
-.carousel-button.right {
-  right: 10px;
-}
-
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  display: none; /* Hide carousel buttons since scrolling is enabled */
 }
 
 .custom-link {
   text-decoration: none;
   color: inherit;
+}
+
+.custom-search-input {
+  width: 300px; /* You can change this value */
 }
