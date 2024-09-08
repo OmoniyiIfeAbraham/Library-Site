@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 function Detail() {
   const { id } = useParams();
-  console.log(id)
+  console.log(id);
   const [book, setBook] = useState(null);
   const [authorsBooks, setAuthorsBooks] = useState([]);
 
@@ -58,59 +58,64 @@ function Detail() {
 
   return (
     <div>
-      <div
-        className="main-content"
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-        }}
-      >
-        <div
-          className="img-div"
-          style={{
-            width: "25%",
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <img
-            src={book?.volumeInfo?.imageLinks?.thumbnail}
-            style={{
-              width: "75%",
-              height: "70%",
-              objectFit: "cover",
-              backgroundRepeat: "no-repeat",
-            }}
-          />
-        </div>
-        <div
-          className="info"
-          style={{
-            width: "75%",
-            height: "100%",
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            paddingLeft: 15,
-          }}
-        >
-          <div
-            className="sub-info"
-            style={{
-              width: "75%",
-              height: "70%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="container-fluid">
+          {/* Navbar Title */}
+          <a href="/" class=" btn btn-primary ">
+            <span>
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+                class="cp-svg icon-svg-arrow-back"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+              >
+                <polygon
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  points="20 11 7.83 11 13.42 5.41 12 4 4 12 12 20 13.41 18.59 7.83 13 20 13"
+                ></polygon>
+              </svg>
+            </span>
+            Previous Page
+          </a>
+
+          {/* Navbar Toggler for Mobile View */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          {/* Navbar Content */}
+          <div
+            className="collapse navbar-collapse justify-content-end"
+            id="navbarContent"
+          >
+            <a className="navbar-brand text-white fw-bold" href="/">
+              Page Turner's
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div className="main-content mt-5">
+        <div className="img-div">
+          <img src={book?.volumeInfo?.imageLinks?.thumbnail} />
+        </div>
+        <div className="info">
+          <div className="sub-info">
             <div className="title_authors">
               <h2 className="title">{book?.volumeInfo?.title}</h2>
               <h6 className="authors" style={{ color: "#029EDA" }}>
-                {book?.volumeInfo?.authors[0]}
+                {book?.volumeInfo?.authors[0]}A
               </h6>
               <p className="authors" style={{ color: "#029EDA" }}>
                 {book?.volumeInfo?.pageCount} pages
@@ -122,16 +127,10 @@ function Detail() {
             >
               <p
                 style={{
-                  fontWeight: "bold",
-                  color: "#029EDA",
                   paddingRight: 10,
                   paddingLeft: 10,
                   paddingTop: 20,
                   paddingBottom: 20,
-                  borderWidth: 2,
-                  borderStyle: "solid",
-                  borderColor: "#029EDA",
-                  borderRadius: 5,
                 }}
               >
                 <span style={{ marginRight: 15 }}>
@@ -163,10 +162,7 @@ function Detail() {
           </div>
         </div>
       </div>
-      <div
-        className="divider"
-        style={{ width: "100%", paddingLeft: 45, paddingRight: 45 }}
-      >
+      <div className="divider">
         <hr />
       </div>
       <div className="books">

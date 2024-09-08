@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const [fictional, setFictional] = useState([]);
   const [nonFictional, setNonFictional] = useState([]);
+  const [search, setSearch] = useState("");
 
   const fetchFictionalData = () => {
     let url =
@@ -42,16 +43,30 @@ function Home() {
     fetchNonFictionalData();
   }, []);
 
+  // Function to filter books based on the search term
+  const filterBooks = (books) => {
+    return books.filter((book) => {
+      const title = book.volumeInfo?.title?.toLowerCase() || "";
+      const authors = book.volumeInfo?.authors?.[0]?.toLowerCase() || "";
+      return (
+        title.includes(search.toLowerCase()) ||
+        authors.includes(search.toLowerCase())
+      );
+    });
+  };
+
+  // Filtered data for displaying
+  const filteredFictional = filterBooks(fictional);
+  const filteredNonFictional = filterBooks(nonFictional);
+
   return (
-    <div className="app-container">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
-          {/* Navbar Title */}
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand text-white fw-bold" href="/">
             Page Turner's
           </a>
 
-          {/* Navbar Toggler for Mobile View */}
           <button
             className="navbar-toggler"
             type="button"
@@ -64,7 +79,6 @@ function Home() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Navbar Content */}
           <div
             className="collapse navbar-collapse justify-content-end"
             id="navbarContent"
@@ -74,71 +88,81 @@ function Home() {
               <input
                 className="form-control me-2 custom-search-input"
                 type="search"
-                placeholder="Search"
+                placeholder="Search by title or author"
                 aria-label="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </form>
           </div>
         </div>
       </nav>
 
-      <h3 className="heading">Fictional Books</h3>
+      <h3 className="heading mt-5">Fictional Books</h3>
       <div className="carousel-container">
         <div className="carousel">
-          {fictional.map((book, index) => (
-            <div className="book-card" key={index}>
-              <Link to={`/book/${book.id}`} className="custom-link">
-                {book.volumeInfo && book.volumeInfo.imageLinks ? (
-                  <img
-                    src={book.volumeInfo.imageLinks.thumbnail}
-                    alt={book.volumeInfo.title}
-                    className="book-image"
-                  />
-                ) : (
-                  <img
-                    src="./../../assests/default.jpg"
-                    alt="Default"
-                    className="book-image"
-                  />
-                )}
-                {book.volumeInfo && (
-                  <p className="book-title">
-                    {book.volumeInfo.title.slice(0, 30)}
-                  </p>
-                )}
-              </Link>
-            </div>
-          ))}
+          {filteredFictional.length > 0 ? (
+            filteredFictional.map((book, index) => (
+              <div className="book-card" key={index}>
+                <Link to={`/book/${book.id}`} className="custom-link">
+                  {book.volumeInfo && book.volumeInfo.imageLinks ? (
+                    <img
+                      src={book.volumeInfo.imageLinks.thumbnail}
+                      alt={book.volumeInfo.title}
+                      className="book-image"
+                    />
+                  ) : (
+                    <img
+                      src="./../../assests/default.jpg"
+                      alt="Default"
+                      className="book-image"
+                    />
+                  )}
+                  {book.volumeInfo && (
+                    <p className="book-title">
+                      {book.volumeInfo.title.slice(0, 30)}
+                    </p>
+                  )}
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p className="book-title">No Book Found</p>
+          )}
         </div>
       </div>
 
       <h3 className="heading">Non-Fictional Books</h3>
       <div className="carousel-container">
         <div className="carousel">
-          {nonFictional.map((book, index) => (
-            <div className="book-card" key={index}>
-              <Link to={`/book/${book.id}`} className="custom-link">
-                {book.volumeInfo && book.volumeInfo.imageLinks ? (
-                  <img
-                    src={book.volumeInfo.imageLinks.thumbnail}
-                    alt={book.volumeInfo.title}
-                    className="book-image"
-                  />
-                ) : (
-                  <img
-                    src="./../../assests/default.jpg"
-                    alt="Default"
-                    className="book-image"
-                  />
-                )}
-                {book.volumeInfo && (
-                  <p className="book-title">
-                    {book.volumeInfo.title.slice(0, 30)}
-                  </p>
-                )}
-              </Link>
-            </div>
-          ))}
+          {filteredNonFictional.length > 0 ? (
+            filteredNonFictional.map((book, index) => (
+              <div className="book-card" key={index}>
+                <Link to={`/book/${book.id}`} className="custom-link">
+                  {book.volumeInfo && book.volumeInfo.imageLinks ? (
+                    <img
+                      src={book.volumeInfo.imageLinks.thumbnail}
+                      alt={book.volumeInfo.title}
+                      className="book-image"
+                    />
+                  ) : (
+                    <img
+                      src="./../../assests/default.jpg"
+                      alt="Default"
+                      className="book-image"
+                    />
+                  )}
+                  {book.volumeInfo && (
+                    <p className="book-title">
+                      {book.volumeInfo.title.slice(0, 30)}
+                    </p>
+                  )}
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p className="book-title">No Book Found</p>
+          )}
         </div>
       </div>
     </div>

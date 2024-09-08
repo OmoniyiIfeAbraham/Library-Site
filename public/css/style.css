@@ -17,6 +17,7 @@ body {
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
+  text-decoration: underline;
 }
 
 /* Updated Carousel Container */
@@ -83,4 +84,61 @@ body {
 
 .custom-search-input {
   width: 300px; /* You can change this value */
+}
+
+.navbar {
+  background-color: #0d3f5c;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.img-div {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-div img {
+  width: 75%;
+  height: 70%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
+
+.info {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15;
+}
+
+.sub-info {
+  width: 75%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.date p {
+  font-weight: bold;
+  color: #029eda;
+  border-width: 2;
+  border-style: solid;
+  border-color: #029eda;
+  border-radius: 5;
+}
+
+.divider {
+  width: 100%;
+  padding-left: 45;
+  padding-right: 45;
 }
