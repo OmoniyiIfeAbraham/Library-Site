@@ -108,7 +108,15 @@ function Detail() {
       </nav>
       <div className="main-content mt-5">
         <div className="img-div">
-          <img src={book?.volumeInfo?.imageLinks?.thumbnail} />
+          {book.volumeInfo && book.volumeInfo.imageLinks ? (
+            <img src={book?.volumeInfo?.imageLinks?.thumbnail} />
+          ) : (
+            <img
+              src="./../../assests/default.jpg"
+              alt="Default"
+              className="book-image"
+            />
+          )}
         </div>
         <div className="info">
           <div className="sub-info">
