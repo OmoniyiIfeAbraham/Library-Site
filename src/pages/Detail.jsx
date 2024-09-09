@@ -162,7 +162,7 @@ function Detail() {
             </div>
             <div className="desc">
               <p>{book?.volumeInfo?.description?.slice(0, 750)}.</p>
-              <Link to={book?.volumeInfo?.previewLink}>
+              <Link to={book?.volumeInfo?.previewLink} target="_blank">
                 <p>Read More...</p>
               </Link>
             </div>
