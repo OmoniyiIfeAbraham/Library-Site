@@ -88,7 +88,7 @@ function Home() {
               <input
                 className="form-control me-2 custom-search-input"
                 type="search"
-                placeholder="Search by title or author"
+                placeholder="Search by title, author..."
                 aria-label="Search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

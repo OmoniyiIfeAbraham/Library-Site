@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 function Detail() {
   const { id } = useParams();
-  console.log(id);
   const [book, setBook] = useState(null);
   const [authorsBooks, setAuthorsBooks] = useState([]);
 
@@ -24,7 +23,7 @@ function Detail() {
           setBook(result.data);
 
           // Fetch author's books once the main book data is fetched
-          const author = result.data.volumeInfo.authors?.[0];
+          const author = result?.data?.volumeInfo?.authors[0];
           if (author) {
             fetchAuthorsBooks(author);
           }
@@ -108,7 +107,7 @@ function Detail() {
       </nav>
       <div className="main-content mt-5">
         <div className="img-div">
-          {book.volumeInfo && book.volumeInfo.imageLinks ? (
+          {book?.volumeInfo && book?.volumeInfo.imageLinks ? (
             <img src={book?.volumeInfo?.imageLinks?.thumbnail} />
           ) : (
             <img
@@ -162,7 +161,7 @@ function Detail() {
               </p>
             </div>
             <div className="desc">
-              <p>{book?.volumeInfo?.description.slice(0, 750)}.</p>
+              <p>{book?.volumeInfo?.description?.slice(0, 750)}.</p>
               <Link to={book?.volumeInfo?.previewLink}>
                 <p>Read More...</p>
               </Link>
@@ -182,10 +181,10 @@ function Detail() {
             {authorsBooks.map((book, index) => (
               <div className="book-card" key={index}>
                 <Link to={`/book/${book.id}`} className="custom-link">
-                  {book.volumeInfo && book.volumeInfo.imageLinks ? (
+                  {book?.volumeInfo && book?.volumeInfo?.imageLinks ? (
                     <img
-                      src={book.volumeInfo.imageLinks.thumbnail}
-                      alt={book.volumeInfo.title}
+                      src={book?.volumeInfo?.imageLinks?.thumbnail}
+                      alt={book?.volumeInfo?.title}
                       className="book-image"
                     />
                   ) : (
@@ -195,9 +194,9 @@ function Detail() {
                       className="book-image"
                     />
                   )}
-                  {book.volumeInfo && (
+                  {book?.volumeInfo && (
                     <p className="book-title">
-                      {book.volumeInfo.title.slice(0, 30)}...
+                      {book?.volumeInfo?.title?.slice(0, 30)}...
                     </p>
                   )}
                 </Link>

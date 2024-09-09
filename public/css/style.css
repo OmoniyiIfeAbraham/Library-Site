@@ -20,30 +20,28 @@ body {
   text-decoration: underline;
 }
 
-/* Updated Carousel Container */
 .carousel-container {
   position: relative;
   width: 100%;
-  overflow-x: auto; /* Enables horizontal scrolling */
+  overflow-x: auto;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Aligns items to the start */
+  justify-content: flex-start;
   margin-bottom: 30px;
-  padding-bottom: 10px; /* Adds padding to avoid cutoff */
+  padding-bottom: 10px;
 }
 
-/* Updated Carousel */
 .carousel {
-  display: flex; /* Flex to align items in a row */
-  gap: 20px; /* Adds spacing between items */
-  overflow-x: auto; /* Enables horizontal scrolling */
-  scroll-behavior: smooth; /* Smooth scrolling effect */
+  display: flex; 
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
   padding: 10px 0;
 }
 
 .book-card {
-  flex: 0 0 auto; /* Ensure items don't shrink */
-  width: 150px; /* Fixed width for each card */
+  flex: 0 0 auto;
+  width: 150px;
   margin: 0 10px;
   box-sizing: border-box;
   text-align: center;
@@ -72,18 +70,13 @@ body {
   color: #555;
 }
 
-/* Remove Carousel Button Styles */
-.carousel-button {
-  display: none; /* Hide carousel buttons since scrolling is enabled */
-}
-
 .custom-link {
   text-decoration: none;
   color: inherit;
 }
 
 .custom-search-input {
-  width: 300px; /* You can change this value */
+  width: 300px;
 }
 
 .navbar {
